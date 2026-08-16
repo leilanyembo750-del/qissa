@@ -674,6 +674,21 @@
   </footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>
+<script>
+  async function testQissaConnection() {
+    const { data, error } = await supabaseClient
+      .from("profiles")
+      .select("id")
+      .limit(1);
 
+    if (error) {
+      console.error("Qissa connection error:", error);
+    } else {
+      console.log("🎉 Qissa is connected to Supabase!");
+    }
+  }
+
+  testQissaConnection();
+</script>
 </body>
 </html>

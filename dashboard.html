@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard — Qissa</title>
+
+  <style>
+    :root {
+      --plum: #5B2C6F;
+      --purple: #B983FF;
+      --pink: #F4A6C1;
+      --cream: #FFF9FC;
+      --dark: #29232B;
+      --muted: #77717A;
+      --white: #FFFFFF;
+      --light: #F4EFF7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+    }
+
+    nav {
+      height: 70px;
+      background: white;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--plum);
+    }
+
+    .logo span {
+      color: var(--pink);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--plum);
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 45px 25px;
+    }
+
+    .welcome {
+      background: linear-gradient(135deg, var(--plum), var(--purple));
+      color: white;
+      border-radius: 22px;
+      padding: 35px;
+      margin-bottom: 30px;
+    }
+
+    .welcome h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .welcome p {
+      opacity: .9;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 35px;
+    }
+
+    .action {
+      background: white;
+      border: 1px solid #eee;
+      border-radius: 17px;
+      padding: 25px;
+      text-decoration: none;
+      color: var(--dark);
+      transition: .2s;
+    }
+
+    .action:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(91,44,111,.1);
+    }
+
+    .action-icon {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .action h3 {
+      color: var(--plum);
+      margin-bottom: 7px;
+    }
+
+    .action p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .section {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 25px;
+      border: 1px solid #eee;
+    }
+
+    .section h2 {
+      color: var(--plum);
+      margin-bottom: 20px;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 35px;
+      background: var(--light);
+      border-radius: 12px;
+      color: var(--muted);
+    }
+
+    .pro {
+      background: linear-gradient(135deg, #fff1f7, #f2e8ff);
+      border: 1px solid #ead8f0;
+    }
+
+    .pro button {
+      margin-top: 15px;
+      border: none;
+      background: var(--plum);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 22px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .logout {
+      border: none;
+      background: #f3edf5;
+      color: var(--plum);
+      padding: 10px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #loading {
+      text-align: center;
+      padding: 60px;
+    }
+
+    #dashboard {
+      display: none;
+    }
+
+    @media(max-width: 700px) {
+
+      .actions {
+        grid-template-columns: 1fr;
+      }
+
+      .welcome h1 {
+        font-size: 27px;
+      }
+
+      nav {
+        padding: 0 5%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+
+    <div class="logo">
+      QISSA<span>.</span>
+    </div>
+
+    <div>
+      <a href="index.html">Home</a>
+      &nbsp;&nbsp;
+
+      <button
+        class="logout"
+        onclick="logout()">
+        Logout
+      </button>
+    </div>
+
+  </nav>
+
+
+  <div id="loading">
+    Checking your Qissa account...
+  </div>
+
+
+  <main
+    id="dashboard"
+    class="container">
+
+    <section class="welcome">
+
+      <h1>
+        Welcome, <span id="displayName">Writer</span> ✨
+      </h1>
+
+      <p>
+        Your Qissa writing space is ready.
+      </p>
+
+    </section>
+
+
+    <section class="actions">
+
+      <a
+        href="create-story.html"
+        class="action">
+
+        <div class="action-icon">✍️</div>
+
+        <h3>
+          Create Story
+        </h3>
+
+        <p>
+          Start writing your next meaningful story.
+        </p>
+
+      </a>
+
+
+      <a
+        href="#stories"
+        class="action">
+
+        <div class="action-icon">📚</div>
+
+        <h3>
+          My Stories
+        </h3>
+
+        <p>
+          Manage your stories and chapters.
+        </p>
+
+      </a>
+
+
+      <a
+        href="#analytics"
+        class="action">
+
+        <div class="action-icon">📊</div>
+
+        <h3>
+          Analytics
+        </h3>
+
+        <p>
+          Track views, likes and readers.
+        </p>
+
+      </a>
+
+    </section>
+
+
+    <section
+      id="stories"
+      class="section">
+
+      <h2>
+        📚 My Stories
+      </h2>
+
+      <div
+        id="storiesList"
+        class="empty">
+
+        Loading your stories...
+
+      </div>
+
+    </section>
+
+
+    <section
+      id="analytics"
+      class="section">
+
+      <h2>
+        📊 Your Statistics
+      </h2>
+
+      <div class="actions">
+
+        <div class="action">
+          <div class="action-icon">👀</div>
+          <h3 id="totalViews">0</h3>
+          <p>Total Views</p>
+        </div>
+
+        <div class="action">
+          <div class="action-icon">❤️</div>
+          <h3 id="totalLikes">0</h3>
+          <p>Total Likes</p>
+        </div>
+
+        <div class="action">
+          <div class="action-icon">📚</div>
+          <h3 id="totalStories">0</h3>
+          <p>Stories</p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="section pro">
+
+      <h2>
+        👑 Qissa Pro
+      </h2>
+
+      <p>
+        Unlock advanced author tools, deeper analytics,
+        customization and future premium features.
+      </p>
+
+      <button>
+        Coming Soon
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+
+
+  <script>
+
+    async function loadDashboard() {
+
+      const {
+        data: { user }
+      } = await supabaseClient.auth.getUser();
+
+
+      if (!user) {
+
+        window.location.href = "auth.html";
+
+        return;
+
+      }
+
+
+      const {
+        data: profile,
+        error: profileError
+      } = await supabaseClient
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+
+      if (profileError) {
+
+        document.getElementById("loading")
+          .textContent =
+          "Could not load your Qissa profile.";
+
+        return;
+
+      }
+
+
+      document.getElementById("displayName")
+        .textContent =
+        profile.display_name || profile.username;
+
+
+      document.getElementById("loading")
+        .style.display = "none";
+
+      document.getElementById("dashboard")
+        .style.display = "block";
+
+
+      const {
+        data: stories,
+        error: storiesError
+      } = await supabaseClient
+        .from("stories")
+        .select("*")
+        .eq("author_id", user.id)
+        .order("created_at", {
+          ascending: false
+        });
+
+
+      if (storiesError) {
+
+        document.getElementById("storiesList")
+          .textContent =
+          "Could not load your stories.";
+
+        return;
+
+      }
+
+
+      document.getElementById("totalStories")
+        .textContent = stories.length;
+
+
+      let views = 0;
+      let likes = 0;
+
+
+      stories.forEach(story => {
+
+        views += Number(story.views || 0);
+        likes += Number(story.likes_count || 0);
+
+      });
+
+
+      document.getElementById("totalViews")
+        .textContent = views;
+
+      document.getElementById("totalLikes")
+        .textContent = likes;
+
+
+      if (stories.length === 0) {
+
+        document.getElementById("storiesList")
+          .innerHTML =
+          "You haven't published a story yet.<br><br>" +
+          "Click <strong>Create Story</strong> above to begin.";
+
+        return;
+
+      }
+
+
+      document.getElementById("storiesList")
+        .innerHTML =
+        stories.map(story => `
+
+          <div style="
+            background:white;
+            padding:18px;
+            border-radius:12px;
+            margin-bottom:10px;
+            text-align:left;
+            border:1px solid #eee;
+          ">
+
+            <strong style="
+              color:#5B2C6F;
+              font-size:17px;
+            ">
+              ${story.title}
+            </strong>
+
+            <br>
+
+            <small>
+              ${story.status} •
+              ${story.views} views
+            </small>
+
+          </div>
+
+        `).join("");
+
+    }
+
+
+    async function logout() {
+
+      await supabaseClient.auth.signOut();
+
+      window.location.href = "auth.html";
+
+    }
+
+
+    loadDashboard();
+
+  </script>
+
+</body>
+</html>

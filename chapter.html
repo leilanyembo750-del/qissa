@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Chapter 1 — A Love Written by Qadr | Qissa</title>
+
+  <style>
+    :root {
+      --plum: #5B2C6F;
+      --purple: #B983FF;
+      --pink: #F4A6C1;
+      --cream: #FFF9FC;
+      --dark: #242124;
+      --white: #FFFFFF;
+      --soft-purple: #F2E8FF;
+      --muted: #756c77;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--cream);
+      color: var(--dark);
+      transition: 0.3s;
+    }
+
+    /* NAVIGATION */
+
+    nav {
+      height: 68px;
+      background: white;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      font-family: Arial, sans-serif;
+    }
+
+    .logo {
+      font-family: Arial, sans-serif;
+      font-size: 27px;
+      font-weight: 800;
+      color: var(--plum);
+    }
+
+    .logo span {
+      color: var(--pink);
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .nav-btn {
+      border: none;
+      background: #f5f1f6;
+      color: var(--plum);
+      padding: 9px 13px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .back {
+      text-decoration: none;
+      color: var(--plum);
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+    }
+
+    /* READING CONTROLS */
+
+    .reading-controls {
+      background: white;
+      border-bottom: 1px solid #eee;
+      padding: 12px 6%;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      font-family: Arial, sans-serif;
+    }
+
+    .reading-controls button {
+      border: 1px solid #ddd;
+      background: white;
+      color: var(--plum);
+      width: 38px;
+      height: 34px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* STORY HEADER */
+
+    .chapter-header {
+      text-align: center;
+      padding: 70px 20px 35px;
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .chapter-label {
+      color: var(--purple);
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .chapter-header h1 {
+      color: var(--plum);
+      font-size: clamp(34px, 6vw, 55px);
+      line-height: 1.15;
+      margin-bottom: 15px;
+    }
+
+    .chapter-header p {
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    /* READING AREA */
+
+    .reading-area {
+      max-width: 760px;
+      margin: auto;
+      padding: 20px 25px 70px;
+    }
+
+    .story-text {
+      font-size: 20px;
+      line-height: 1.95;
+      letter-spacing: 0.1px;
+    }
+
+    .story-text p {
+      margin-bottom: 25px;
+    }
+
+    .drop-cap::first-letter {
+      float: left;
+      font-size: 70px;
+      line-height: 55px;
+      padding-right: 8px;
+      color: var(--plum);
+      font-weight: bold;
+    }
+
+    /* AD SPACE */
+
+    .ad-space {
+      margin: 45px auto;
+      min-height: 90px;
+      max-width: 650px;
+      background: #f5f1f6;
+      border: 1px dashed #d8cbdc;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+    }
+
+    /* ACTIONS */
+
+    .actions {
+      border-top: 1px solid #e5dfe7;
+      border-bottom: 1px solid #e5dfe7;
+      padding: 20px 0;
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-family: Arial, sans-serif;
+    }
+
+    .action-btn {
+      border: none;
+      background: var(--soft-purple);
+      color: var(--plum);
+      padding: 11px 18px;
+      border-radius: 24px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .action-btn:hover {
+      background: var(--pink);
+    }
+
+    /* CHAPTER NAVIGATION */
+
+    .chapter-navigation {
+      max-width: 760px;
+      margin: 30px auto 70px;
+      padding: 0 25px;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      font-family: Arial, sans-serif;
+    }
+
+    .chapter-navigation a {
+      text-decoration: none;
+      color: var(--plum);
+      background: white;
+      border: 1px solid #ddd;
+      padding: 13px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+    }
+
+    .chapter-navigation a:hover {
+      background: var(--soft-purple);
+    }
+
+    /* COMMENTS */
+
+    .comments {
+      max-width: 760px;
+      margin: auto;
+      padding: 0 25px 70px;
+      font-family: Arial, sans-serif;
+    }
+
+    .comments h2 {
+      color: var(--plum);
+      margin-bottom: 20px;
+    }
+
+    .comment-box {
+      background: white;
+      border-radius: 12px;
+      padding: 18px;
+      border: 1px solid #eee;
+    }
+
+    .comment-box textarea {
+      width: 100%;
+      height: 100px;
+      resize: none;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 12px;
+      outline: none;
+      font-family: Arial, sans-serif;
+    }
+
+    .comment-box button {
+      margin-top: 10px;
+      background: var(--plum);
+      color: white;
+      border: none;
+      padding: 11px 20px;
+      border-radius: 22px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #211126;
+      color: white;
+      padding: 45px 7%;
+      font-family: Arial, sans-serif;
+    }
+
+    footer h2 {
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      color: #d8cbdc;
+      max-width: 500px;
+      line-height: 1.6;
+    }
+
+    .copyright {
+      margin-top: 25px;
+      color: #aa9aaa;
+      font-size: 13px;
+    }
+
+    /* DARK MODE */
+
+    body.dark {
+      background: #17131a;
+      color: #eee;
+    }
+
+    body.dark nav,
+    body.dark .reading-controls,
+    body.dark .comment-box,
+    body.dark .chapter-navigation a {
+      background: #241d28;
+      border-color: #3a303f;
+    }
+
+    body.dark .chapter-header h1,
+    body.dark .comments h2 {
+      color: #d9b8ff;
+    }
+
+    body.dark .chapter-header p {
+      color: #aaa;
+    }
+
+    body.dark .reading-controls button {
+      background: #302635;
+      color: #d9b8ff;
+      border-color: #4a3d50;
+    }
+
+    body.dark .ad-space {
+      background: #241d28;
+      border-color: #4a3d50;
+    }
+
+    body.dark .action-btn {
+      background: #302635;
+      color: #d9b8ff;
+    }
+
+    body.dark .chapter-navigation a {
+      color: #d9b8ff;
+    }
+
+    body.dark .comment-box textarea {
+      background: #302635;
+      color: white;
+      border-color: #4a3d50;
+    }
+
+    body.dark .story-text {
+      color: #eee;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+      .back {
+        display: none;
+      }
+
+      .reading-area {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .story-text {
+        font-size: 18px;
+        line-height: 1.85;
+      }
+
+      .chapter-navigation {
+        padding: 0 20px;
+      }
+
+      .chapter-navigation a {
+        padding: 11px 14px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <nav>
+
+    <a href="story.html" class="back">
+      ← Back to Story
+    </a>
+
+    <div class="logo">
+      QISSA<span>.</span>
+    </div>
+
+    <div class="nav-right">
+
+      <button
+        class="nav-btn"
+        onclick="decreaseFont()">
+        A-
+      </button>
+
+      <button
+        class="nav-btn"
+        onclick="increaseFont()">
+        A+
+      </button>
+
+      <button
+        class="nav-btn"
+        onclick="toggleDarkMode()">
+        🌙
+      </button>
+
+    </div>
+
+  </nav>
+
+
+  <!-- CHAPTER HEADER -->
+
+  <header class="chapter-header">
+
+    <div class="chapter-label">
+      Chapter 01
+    </div>
+
+    <h1>
+      The Unexpected Meeting
+    </h1>
+
+    <p>
+      A Love Written by Qadr • By Aaliyah
+    </p>
+
+  </header>
+
+
+  <!-- READING AREA -->
+
+  <main class="reading-area">
+
+    <article class="story-text" id="storyText">
+
+      <p class="drop-cap">
+        Maryam had always believed that some meetings
+        were simply coincidences.
+      </p>
+
+      <p>
+        She had spent the entire morning rushing across
+        campus, trying not to be late for her first lecture.
+        Her books were pressed against her chest while
+        she searched through her bag for her phone.
+      </p>
+
+      <p>
+        She wasn't looking where she was going.
+      </p>
+
+      <p>
+        And then—
+      </p>
+
+      <p>
+        She walked straight into someone.
+      </p>
+
+      <p>
+        Her books fell onto the ground.
+      </p>
+
+      <p>
+        "I'm so sorry!"
+      </p>
+
+      <p>
+        The young man immediately stepped back and began
+        helping her collect the books.
+      </p>
+
+      <p>
+        "It's okay," he said.
+      </p>
+
+      <p>
+        Maryam quickly picked up the last book and stood.
+      </p>
+
+      <p>
+        "Thank you."
+      </p>
+
+      <p>
+        She looked at him for a moment before lowering
+        her gaze.
+      </p>
+
+      <p>
+        "You're welcome."
+      </p>
+
+      <p>
+        There was something strangely familiar about the
+        moment, although she couldn't explain why.
+      </p>
+
+      <p>
+        She thanked him again and continued walking.
+      </p>
+
+      <p>
+        She didn't know it yet, but that ordinary morning
+        would become one of the most important moments
+        of her life.
+      </p>
+
+
+      <!-- ADVERTISEMENT LOCATION -->
+
+      <div class="ad-space">
+        Advertisement
+      </div>
+
+
+      <p>
+        Later that afternoon, Maryam sat quietly in the
+        university library.
+      </p>
+
+      <p>
+        She opened her notebook and tried to concentrate.
+        But the events of the morning kept returning to
+        her thoughts.
+      </p>
+
+      <p>
+        She smiled at herself.
+      </p>
+
+      <p>
+        "Why am I even thinking about this?"
+      </p>
+
+      <p>
+        She shook her head and returned to her notes.
+      </p>
+
+      <p>
+        Some things in life begin quietly.
+      </p>
+
+      <p>
+        You don't recognize them as beginnings until
+        much later.
+      </p>
+
+    </article>
+
+
+    <!-- ACTION BUTTONS -->
+
+    <div class="actions">
+
+      <button
+        class="action-btn"
+        onclick="likeChapter()">
+        ❤️ Like
+      </button>
+
+      <button
+        class="action-btn"
+        onclick="saveChapter()">
+        🔖 Save
+      </button>
+
+      <button
+        class="action-btn">
+        💬 Comment
+      </button>
+
+      <button
+        class="action-btn"
+        onclick="shareChapter()">
+        🔗 Share
+      </button>
+
+    </div>
+
+  </main>
+
+
+  <!-- CHAPTER NAVIGATION -->
+
+  <div class="chapter-navigation">
+
+    <a href="story.html">
+      ← Chapters
+    </a>
+
+    <a href="chapter.html">
+      Next Chapter →
+    </a>
+
+  </div>
+
+
+  <!-- COMMENTS -->
+
+  <section class="comments">
+
+    <h2>
+      💬 Join the conversation
+    </h2>
+
+    <div class="comment-box">
+
+      <textarea
+        placeholder="What did you think about this chapter?"
+      ></textarea>
+
+      <button>
+        Post Comment
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <h2>
+      QISSA.
+    </h2>
+
+    <p>
+      Stories with meaning. A home for readers
+      and authors who love meaningful storytelling.
+    </p>
+
+    <div class="copyright">
+      © 2026 Qissa. All rights reserved.
+    </div>
+
+  </footer>
+
+
+  <script>
+
+    let fontSize = 20;
+
+    function increaseFont() {
+
+      if (fontSize < 28) {
+
+        fontSize += 2;
+
+        document.getElementById("storyText")
+          .style.fontSize = fontSize + "px";
+
+      }
+
+    }
+
+
+    function decreaseFont() {
+
+      if (fontSize > 16) {
+
+        fontSize -= 2;
+
+        document.getElementById("storyText")
+          .style.fontSize = fontSize + "px";
+
+      }
+
+    }
+
+
+    function toggleDarkMode() {
+
+      document.body.classList.toggle("dark");
+
+    }
+
+
+    function likeChapter() {
+
+      alert("Like feature will be connected to your Qissa account later ❤️");
+
+    }
+
+
+    function saveChapter() {
+
+      alert("Bookmark feature will be connected to your Qissa account later 🔖");
+
+    }
+
+
+    function shareChapter() {
+
+      if (navigator.share) {
+
+        navigator.share({
+          title: "A Love Written by Qadr",
+          text: "Read this story on Qissa.",
+          url: window.location.href
+        });
+
+      } else {
+
+        alert("Share link copied!");
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>

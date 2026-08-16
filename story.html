@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>A Love Written by Qadr — Qissa</title>
+
+  <style>
+    :root {
+      --plum: #5B2C6F;
+      --purple: #B983FF;
+      --pink: #F4A6C1;
+      --cream: #FFF9FC;
+      --dark: #242124;
+      --white: #FFFFFF;
+      --soft-purple: #F2E8FF;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+    }
+
+    /* NAVIGATION */
+
+    nav {
+      height: 72px;
+      background: white;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--plum);
+    }
+
+    .logo span {
+      color: var(--pink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .login {
+      background: var(--plum);
+      color: white !important;
+      padding: 11px 20px;
+      border-radius: 25px;
+    }
+
+    /* STORY HERO */
+
+    .story-hero {
+      background: linear-gradient(
+        135deg,
+        #FFF9FC,
+        #F2E8FF
+      );
+
+      padding: 70px 7%;
+
+      display: flex;
+      gap: 55px;
+      align-items: center;
+    }
+
+    /* COVER */
+
+    .book-cover {
+      width: 260px;
+      height: 360px;
+
+      flex-shrink: 0;
+
+      background: linear-gradient(
+        145deg,
+        var(--plum),
+        var(--purple)
+      );
+
+      border-radius: 14px;
+
+      box-shadow:
+        0 25px 50px rgba(91,44,111,0.25);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 30px;
+
+      color: white;
+    }
+
+    .book-cover h2 {
+      font-size: 30px;
+      line-height: 1.2;
+    }
+
+    .book-cover p {
+      margin-top: 15px;
+      opacity: 0.85;
+    }
+
+    /* STORY INFO */
+
+    .story-info {
+      max-width: 700px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--pink);
+      color: var(--dark);
+      padding: 7px 13px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .story-info h1 {
+      color: var(--plum);
+      font-size: clamp(35px, 5vw, 55px);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .author {
+      color: #6b626d;
+      margin-bottom: 22px;
+    }
+
+    .author strong {
+      color: var(--plum);
+    }
+
+    .description {
+      color: #5d555f;
+      line-height: 1.7;
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    /* STATS */
+
+    .stats {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .stat {
+      color: #6d646e;
+      font-size: 14px;
+    }
+
+    .stat strong {
+      color: var(--plum);
+      font-size: 17px;
+    }
+
+    /* BUTTONS */
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .read-btn,
+    .secondary-btn {
+      border: none;
+      padding: 14px 24px;
+      border-radius: 28px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .read-btn {
+      background: var(--plum);
+      color: white;
+    }
+
+    .secondary-btn {
+      background: white;
+      color: var(--plum);
+      border: 1px solid #ddd;
+    }
+
+    /* CONTENT */
+
+    .content {
+      padding: 60px 7%;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 45px;
+    }
+
+    .section-title {
+      color: var(--plum);
+      margin-bottom: 20px;
+      font-size: 26px;
+    }
+
+    /* CHAPTERS */
+
+    .chapter-list {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+    }
+
+    .chapter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 19px 22px;
+      border-bottom: 1px solid #eee;
+      text-decoration: none;
+      color: var(--dark);
+    }
+
+    .chapter:last-child {
+      border-bottom: none;
+    }
+
+    .chapter:hover {
+      background: var(--soft-purple);
+    }
+
+    .chapter-number {
+      color: var(--plum);
+      font-weight: bold;
+    }
+
+    .chapter-title {
+      flex: 1;
+      margin-left: 15px;
+    }
+
+    .chapter-arrow {
+      color: var(--purple);
+      font-size: 20px;
+    }
+
+    /* AUTHOR CARD */
+
+    .author-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+      text-align: center;
+    }
+
+    .author-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(
+        145deg,
+        var(--purple),
+        var(--pink)
+      );
+      margin: 0 auto 15px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 30px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .author-card h3 {
+      color: var(--plum);
+      margin-bottom: 8px;
+    }
+
+    .author-card p {
+      color: #777;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .follow-btn {
+      border: none;
+      background: var(--plum);
+      color: white;
+      padding: 11px 22px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #211126;
+      color: white;
+      padding: 45px 7%;
+      margin-top: 30px;
+    }
+
+    footer h2 {
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      color: #d8cbdc;
+      max-width: 500px;
+      line-height: 1.6;
+    }
+
+    .copyright {
+      margin-top: 25px;
+      color: #aa9aaa;
+      font-size: 13px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 850px) {
+
+      .nav-links a:not(.login) {
+        display: none;
+      }
+
+      .story-hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .stats,
+      .buttons {
+        justify-content: center;
+      }
+
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      .story-hero {
+        padding: 45px 5%;
+      }
+
+      .book-cover {
+        width: 210px;
+        height: 290px;
+      }
+
+      .content {
+        padding: 40px 5%;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+
+  <!-- NAVIGATION -->
+
+  <nav>
+
+    <div class="logo">
+      QISSA<span>.</span>
+    </div>
+
+    <div class="nav-links">
+
+      <a href="index.html">Home</a>
+
+      <a href="discover.html">Discover</a>
+
+      <a href="#">Genres</a>
+
+      <a href="#">Write</a>
+
+      <a href="#">YouTube</a>
+
+      <a href="#" class="login">
+        Login
+      </a>
+
+    </div>
+
+  </nav>
+
+
+  <!-- STORY HERO -->
+
+  <section class="story-hero">
+
+
+    <!-- BOOK COVER -->
+
+    <div class="book-cover">
+
+      <div>
+
+        <h2>
+          A Love<br>
+          Written<br>
+          by Qadr
+        </h2>
+
+        <p>
+          A Qissa Original
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- STORY INFORMATION -->
+
+    <div class="story-info">
+
+      <span class="badge">
+        ✨ FEATURED STORY
+      </span>
+
+      <h1>
+        A Love Written by Qadr
+      </h1>
+
+      <p class="author">
+        By <strong>Aaliyah</strong>
+      </p>
+
+      <p class="description">
+
+        Sometimes the person you never expected
+        becomes the answer to your dua.
+
+        When Maryam's carefully planned future
+        suddenly changes, she discovers that
+        Allah's plan can be more beautiful than
+        anything she could have imagined.
+
+      </p>
+
+
+      <!-- STATS -->
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong>12.4K</strong><br>
+          Reads
+        </div>
+
+        <div class="stat">
+          <strong>2.8K</strong><br>
+          Likes
+        </div>
+
+        <div class="stat">
+          <strong>24</strong><br>
+          Chapters
+        </div>
+
+        <div class="stat">
+          <strong>4.8 ⭐</strong><br>
+          Rating
+        </div>
+
+      </div>
+
+
+      <!-- BUTTONS -->
+
+      <div class="buttons">
+
+        <a
+          href="chapter.html"
+          class="read-btn"
+        >
+          📖 Start Reading
+        </a>
+
+        <button class="secondary-btn">
+          ❤️ Like
+        </button>
+
+        <button class="secondary-btn">
+          🔖 Save
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MAIN CONTENT -->
+
+  <main class="content">
+
+
+    <!-- CHAPTERS -->
+
+    <div>
+
+      <h2 class="section-title">
+        📚 Chapters
+      </h2>
+
+      <div class="chapter-list">
+
+
+        <a href="chapter.html" class="chapter">
+
+          <span class="chapter-number">
+            01
+          </span>
+
+          <span class="chapter-title">
+            The Unexpected Meeting
+          </span>
+
+          <span class="chapter-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <a href="chapter.html" class="chapter">
+
+          <span class="chapter-number">
+            02
+          </span>
+
+          <span class="chapter-title">
+            A Question of Fate
+          </span>
+
+          <span class="chapter-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <a href="chapter.html" class="chapter">
+
+          <span class="chapter-number">
+            03
+          </span>
+
+          <span class="chapter-title">
+            The Conversation
+          </span>
+
+          <span class="chapter-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <a href="chapter.html" class="chapter">
+
+          <span class="chapter-number">
+            04
+          </span>
+
+          <span class="chapter-title">
+            What Was Written
+          </span>
+
+          <span class="chapter-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <a href="chapter.html" class="chapter">
+
+          <span class="chapter-number">
+            05
+          </span>
+
+          <span class="chapter-title">
+            A Difficult Decision
+          </span>
+
+          <span class="chapter-arrow">
+            →
+          </span>
+
+        </a>
+
+
+        <a href="chapter.html" class="chapter">
+
+          <span class="chapter-number">
+            06
+          </span>
+
+          <span class="chapter-title">
+            Trusting Allah
+          </span>
+
+          <span class="chapter-arrow">
+            →
+          </span>
+
+        </a>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- AUTHOR -->
+
+    <aside>
+
+      <h2 class="section-title">
+        ✍️ About the Author
+      </h2>
+
+      <div class="author-card">
+
+        <div class="author-avatar">
+          A
+        </div>
+
+        <h3>
+          Aaliyah
+        </h3>
+
+        <p>
+          Writer of meaningful stories,
+          quiet romances and stories about
+          faith, growth and finding your way.
+        </p>
+
+        <button class="follow-btn">
+          + Follow
+        </button>
+
+      </div>
+
+    </aside>
+
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <h2>
+      QISSA.
+    </h2>
+
+    <p>
+      Stories with meaning. A home for readers
+      and authors who love meaningful storytelling.
+    </p>
+
+    <div class="copyright">
+      © 2026 Qissa. All rights reserved.
+    </div>
+
+  </footer>
+
+
+</body>
+</html>

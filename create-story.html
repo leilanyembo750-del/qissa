@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Create Story — Qissa</title>
+
+  <style>
+    :root {
+      --plum: #5B2C6F;
+      --purple: #B983FF;
+      --pink: #F4A6C1;
+      --cream: #FFF9FC;
+      --dark: #29232B;
+      --muted: #77717A;
+      --white: #FFFFFF;
+      --light: #F4EFF7;
+      --border: #e7dfea;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+    }
+
+    nav {
+      height: 70px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--plum);
+    }
+
+    .logo span {
+      color: var(--pink);
+    }
+
+    .back {
+      text-decoration: none;
+      color: var(--plum);
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 45px 20px 80px;
+    }
+
+    .header {
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      color: var(--plum);
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 22px;
+    }
+
+    .card h2 {
+      color: var(--plum);
+      font-size: 20px;
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin: 18px 0 8px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #dcd3e0;
+      border-radius: 11px;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      outline: none;
+      background: white;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--purple);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .hint {
+      color: #918993;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .tags-input {
+      min-height: 50px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 25px;
+      padding: 14px 25px;
+      font-size: 14px;
+    }
+
+    .cancel {
+      background: #f1ebf3;
+      color: var(--plum);
+    }
+
+    .draft {
+      background: #eee7f1;
+      color: var(--plum);
+    }
+
+    .publish {
+      background: var(--plum);
+      color: white;
+    }
+
+    .publish:hover {
+      background: #482057;
+    }
+
+    #message {
+      text-align: center;
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 15px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .success {
+      background: #e9f8ee;
+      color: #24713d;
+    }
+
+    .error {
+      background: #fdecec;
+      color: #a52a2a;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 60px;
+      color: var(--muted);
+    }
+
+    #editor {
+      display: none;
+    }
+
+    @media (max-width: 650px) {
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .actions button {
+        width: 100%;
+      }
+
+      .header h1 {
+        font-size: 29px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+
+    <div class="logo">
+      QISSA<span>.</span>
+    </div>
+
+    <a href="dashboard.html" class="back">
+      ← Dashboard
+    </a>
+
+  </nav>
+
+
+  <div id="loading" class="loading">
+    Checking your author account...
+  </div>
+
+
+  <main id="editor" class="container">
+
+    <div class="header">
+
+      <h1>✍️ Create a Story</h1>
+
+      <p>
+        Give your story a home on Qissa. You can save it
+        as a draft and publish it when you're ready.
+      </p>
+
+    </div>
+
+
+    <form id="storyForm">
+
+      <section class="card">
+
+        <h2>📖 Story Information</h2>
+
+        <label for="title">
+          Story Title
+        </label>
+
+        <input
+          id="title"
+          type="text"
+          placeholder="e.g. A Love Written by Qadr"
+          maxlength="150"
+          required
+        >
+
+
+        <label for="description">
+          Description
+        </label>
+
+        <textarea
+          id="description"
+          placeholder="Tell readers what your story is about..."
+          maxlength="2000"
+          required
+        ></textarea>
+
+        <div class="hint">
+          Give readers a reason to open your story.
+        </div>
+
+
+        <label for="cover">
+          Cover Image URL
+        </label>
+
+        <input
+          id="cover"
+          type="url"
+          placeholder="https://example.com/your-cover.jpg"
+        >
+
+        <div class="hint">
+          Cover uploads will be added later using Qissa Storage.
+        </div>
+
+      </section>
+
+
+      <section class="card">
+
+        <h2>🏷️ Story Details</h2>
+
+        <div class="row">
+
+          <div>
+
+            <label for="genre">
+              Genre
+            </label>
+
+            <select id="genre" required>
+
+              <option value="">
+                Choose a genre
+              </option>
+
+              <option value="Romance">
+                Romance
+              </option>
+
+              <option value="Islamic">
+                Islamic
+              </option>
+
+              <option value="Drama">
+                Drama
+              </option>
+
+              <option value="Mystery">
+                Mystery
+              </option>
+
+              <option value="Fantasy">
+                Fantasy
+              </option>
+
+              <option value="Adventure">
+                Adventure
+              </option>
+
+              <option value="Historical">
+                Historical
+              </option>
+
+              <option value="Young Adult">
+                Young Adult
+              </option>
+
+              <option value="Life Lessons">
+                Life Lessons
+              </option>
+
+              <option value="Other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div>
+
+            <label for="status">
+              Story Status
+            </label>
+
+            <select id="status">
+
+              <option value="draft">
+                Draft
+              </option>
+
+              <option value="ongoing">
+                Ongoing
+              </option>
+
+              <option value="completed">
+                Completed
+              </option>
+
+              <option value="paused">
+                Paused
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <label for="tags">
+          Tags
+        </label>
+
+        <input
+          id="tags"
+          class="tags-input"
+          type="text"
+          placeholder="halal romance, faith, family, friendship"
+        >
+
+        <div class="hint">
+          Separate tags with commas.
+        </div>
+
+
+        <label for="rating">
+          Content Classification
+        </label>
+
+        <select id="rating">
+
+          <option value="clean">
+            Clean — suitable for general readers
+          </option>
+
+          <option value="halal">
+            Halal — Qissa's halal storytelling category
+          </option>
+
+        </select>
+
+      </section>
+
+
+      <section class="card">
+
+        <h2>🚀 Publish Settings</h2>
+
+        <p style="
+          color:#77717A;
+          line-height:1.6;
+          font-size:14px;
+        ">
+          You can save your story privately as a draft,
+          or publish it for Qissa readers.
+        </p>
+
+
+        <div class="actions">
+
+          <button
+            type="button"
+            class="cancel"
+            onclick="goBack()">
+            Cancel
+          </button>
+
+          <button
+            type="button"
+            class="draft"
+            onclick="saveStory(false)">
+            💾 Save Draft
+          </button>
+
+          <button
+            type="button"
+            class="publish"
+            onclick="saveStory(true)">
+            🚀 Publish Story
+          </button>
+
+        </div>
+
+        <div id="message"></div>
+
+      </section>
+
+    </form>
+
+  </main>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+
+
+  <script>
+
+    let currentUser = null;
+
+
+    async function checkAuthor() {
+
+      const {
+        data: { user },
+        error
+      } = await supabaseClient.auth.getUser();
+
+
+      if (error || !user) {
+
+        window.location.href = "auth.html";
+
+        return;
+
+      }
+
+
+      const {
+        data: profile,
+        error: profileError
+      } = await supabaseClient
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+
+
+      if (
+        profileError ||
+        !profile ||
+        !["author", "admin"].includes(profile.role)
+      ) {
+
+        document.getElementById("loading").innerHTML = `
+          <h2 style="color:#5B2C6F;">
+            ✍️ Author access required
+          </h2>
+
+          <p style="margin-top:10px;">
+            Your account is currently a reader account.
+          </p>
+
+          <p style="margin-top:8px;">
+            Ask Qissa to enable author access.
+          </p>
+
+          <br>
+
+          <a
+            href="dashboard.html"
+            style="
+              color:#5B2C6F;
+              font-weight:bold;
+            ">
+            ← Back to Dashboard
+          </a>
+        `;
+
+        return;
+
+      }
+
+
+      currentUser = user;
+
+      document.getElementById("loading")
+        .style.display = "none";
+
+      document.getElementById("editor")
+        .style.display = "block";
+
+    }
+
+
+    function getStoryData() {
+
+      const title =
+        document.getElementById("title")
+          .value.trim();
+
+      const description =
+        document.getElementById("description")
+          .value.trim();
+
+      const cover =
+        document.getElementById("cover")
+          .value.trim();
+
+      const genre =
+        document.getElementById("genre")
+          .value;
+
+      const status =
+        document.getElementById("status")
+          .value;
+
+      const rating =
+        document.getElementById("rating")
+          .value;
+
+      const tagsText =
+        document.getElementById("tags")
+          .value.trim();
+
+
+      const tags = tagsText
+        ? tagsText
+            .split(",")
+            .map(tag => tag.trim())
+            .filter(tag => tag.length > 0)
+        : [];
+
+
+      return {
+        title,
+        description,
+        cover_url: cover || null,
+        genre,
+        tags,
+        status,
+        content_rating: rating
+      };
+
+    }
+
+
+    async function saveStory(publish) {
+
+      const message =
+        document.getElementById("message");
+
+
+      const data = getStoryData();
+
+
+      if (!data.title || !data.description || !data.genre) {
+
+        showMessage(
+          "Please complete the title, description and genre.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (!currentUser) {
+
+        showMessage(
+          "Your Qissa session has expired. Please log in again.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      message.style.display = "block";
+      message.className = "success";
+      message.textContent =
+        publish
+          ? "⏳ Publishing your story..."
+          : "⏳ Saving your draft...";
+
+
+      const {
+        data: story,
+        error
+      } = await supabaseClient
+        .from("stories")
+        .insert({
+
+          author_id: currentUser.id,
+
+          title: data.title,
+
+          description: data.description,
+
+          cover_url: data.cover_url,
+
+          genre: data.genre,
+
+          tags: data.tags,
+
+          status: publish
+            ? (
+                data.status === "draft"
+                  ? "ongoing"
+                  : data.status
+              )
+            : "draft",
+
+          content_rating: data.content_rating,
+
+          is_published: publish
+
+        })
+        .select()
+        .single();
+
+
+      if (error) {
+
+        console.error(error);
+
+        showMessage(
+          "❌ " + error.message,
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      showMessage(
+        publish
+          ? "🎉 Your story has been published!"
+          : "💾 Your story has been saved as a draft!",
+        "success"
+      );
+
+
+      setTimeout(() => {
+
+        window.location.href =
+          "dashboard.html";
+
+      }, 1500);
+
+    }
+
+
+    function showMessage(text, type) {
+
+      const message =
+        document.getElementById("message");
+
+      message.style.display = "block";
+
+      message.className = type;
+
+      message.textContent = text;
+
+    }
+
+
+    function goBack() {
+
+      window.location.href =
+        "dashboard.html";
+
+    }
+
+
+    checkAuthor();
+
+  </script>
+
+</body>
+</html>

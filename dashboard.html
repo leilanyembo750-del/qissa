@@ -366,7 +366,21 @@
 
 
   <script>
+setTimeout(() => {
+  const loading = document.getElementById("loading");
 
+  if (loading && loading.style.display !== "none") {
+    loading.innerHTML = `
+      <h2 style="color:#5B2C6F;">Something is taking too long 💜</h2>
+      <p style="margin-top:10px;">
+        Qissa couldn't finish checking your account.
+      </p>
+      <p style="margin-top:10px;font-size:13px;color:#777;">
+        Please refresh the page and try again.
+      </p>
+    `;
+  }
+}, 8000);
     async function loadDashboard() {
 
       const {
